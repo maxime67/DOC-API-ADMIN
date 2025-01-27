@@ -2,6 +2,7 @@ const CategoryController = require('../models/Category');
 
 exports.createCategory = async (req, res) => {
     try {
+        console.log(req.body);
         const category = new CategoryController({
             name: req.body.name
         });

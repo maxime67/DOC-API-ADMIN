@@ -85,9 +85,11 @@ exports.getDocumentationByCategory = async (req, res) => {
 
 exports.getDocumentationByName = async (req, res) => {
   try {
-    const documentation = await Documentation.find({ name: { $regex: `^.*${req.params.name}.*$`, $options: 'i' } })
+    const documentation = await Documentation.find({ name: { $regex: req.params.name, $options: 'i' } })
         .populate('category');
     res.json(documentation);
+    console.log(req.params.name);
+    console.log(documentation);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
