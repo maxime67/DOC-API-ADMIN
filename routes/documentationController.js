@@ -20,6 +20,7 @@ exports.createDocumentation = async (req, res) => {
 exports.getAllDocumentation = async (req, res) => {
   try {
     const documentation = await Documentation.find({}).populate('category');
+
     res.json(documentation);
   } catch (error) {
     res.status(500).json({ message: error.message });
