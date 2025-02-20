@@ -20,6 +20,7 @@ exports.createDocumentation = async (req, res) => {
 exports.getAllDocumentation = async (req, res) => {
   try {
     const documentation = await Documentation.find({}).populate('category');
+
     res.json(documentation);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -85,7 +86,7 @@ exports.getDocumentationByCategory = async (req, res) => {
 
 exports.getDocumentationByName = async (req, res) => {
   try {
-    const documentation = await Documentation.find({ name: { $regex: `^.*${req.params.name}.*$`, $options: 'i' } })
+    const documentation = await Documentation.find({ name: { $regex: req.params.name, $options: 'i' } })
         .populate('category');
     res.json(documentation);
   } catch (error) {
