@@ -16,7 +16,7 @@ app.use(cors())
 // Routes
 app.use('/api/categories', categoryRoutes);
 app.use('/api/documentation', documentationRoutes);
-app.use('/health', healthRoutes);
+app.use('/api/health', healthRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
