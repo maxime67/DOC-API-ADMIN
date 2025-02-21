@@ -3,6 +3,7 @@ const connectDB = require('./config/db');
 const categoryRoutes = require('./routes/categoryRoutes');
 const documentationRoutes = require('./routes/documentationRoutes');
 const healthRoutes = require('./routes/healthRoutes');
+const userRoutes = require('./routes/userRoutes');
 require('dotenv').config();
 const cors = require('cors');
 const app = express();
@@ -17,6 +18,7 @@ app.use(cors())
 app.use('/api/categories', categoryRoutes);
 app.use('/api/documentation', documentationRoutes);
 app.use('/api/health', healthRoutes);
+app.use('/api/auth', userRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
