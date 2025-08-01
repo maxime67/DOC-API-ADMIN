@@ -21,16 +21,9 @@ app.use(cors());
 app.use('/api/categories', categoryRoutes);
 app.use('/api/documentation', documentationRoutes);
 
-const PORT = process.env.PORT || 3000;
-const HTTPS_PORT = process.env.HTTPS_PORT || 3443;
+const PORT = process.env.PORT || 3443;
 
-// Configuration HTTPS
-const httpsOptions = {
-    cert: fs.readFileSync('/etc/letsencrypt/live/k0li.fr/fullchain.pem'),
-    key: fs.readFileSync('/etc/letsencrypt/live/k0li.fr/privkey.pem')
-};
-
-// Démarrage du serveur HTTPS
-https.createServer(httpsOptions, app).listen(HTTPS_PORT, () => {
-    console.log(`HTTPS Server is running on port ${HTTPS_PORT}`);
+// Démarrage du serveur HTTP (Apache gère le SSL)
+app.listen(PORT, '127.0.0.1', () => {
+    console.log(`HTTP Server is running on port ${PORT}`);
 });
