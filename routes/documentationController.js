@@ -13,7 +13,7 @@ exports.getAllDocumentation = async (req, res) => {
 
 exports.getDocumentation = async (req, res) => {
   try {
-    const documentation = await Documentation.findById(req.params.id).populate('category');
+    const documentation = await Documentation.findById(req.params.id).populate('category').sort('updatedAt');
     if (!documentation) {
       return res.status(404).json({ message: 'Documentation not found' });
     }
@@ -27,7 +27,8 @@ exports.getDocumentation = async (req, res) => {
 exports.getDocumentationByCategory = async (req, res) => {
   try {
     const documentation = await Documentation.find({ category: req.params.categoryId })
-        .populate('category');
+        .populate('category')
+        .sort('updatedAt');
     res.json(documentation);
   } catch (error) {
     res.status(500).json({ message: error.message });
