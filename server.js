@@ -5,6 +5,7 @@ const documentationRoutes = require('./routes/documentationRoutes');
 require('dotenv').config();
 const cors = require('cors');
 const app = express();
+var logger = require('morgan');
 
 // Connect to MongoDB
 connectDB();
@@ -12,6 +13,8 @@ connectDB();
 // Middleware
 app.use(express.json());
 app.use(cors())
+app.use(logger('dev'));
+
 // Routes
 app.use('/api/categories', categoryRoutes);
 app.use('/api/documentation', documentationRoutes);
